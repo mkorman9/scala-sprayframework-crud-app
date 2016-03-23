@@ -5,13 +5,12 @@ import org.joda.time.DateTime
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
 
-case class BanForm(id: Int,
-                   bannedUserId: Int,
-                   banAuthorId: Int,
+case class BanForm(bannedUserId: Long,
+                   banAuthorId: Long,
                    created: DateTime,
                    lifted: DateTime)
 
 object BanFormJsonSupport extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val BanDateTimeFormat = DateTimeJSONFormat
-  implicit val BanFormats = jsonFormat5(BanForm)
+  implicit val BanFormats = jsonFormat4(BanForm)
 }

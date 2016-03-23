@@ -12,7 +12,7 @@ class BanLogic(db: Database) {
   }
 
   def dataWithIdLowerThan1000 = {
-    val query = TableQuery[BanTableDef].filter(d => d.id < 1000)
+    val query = TableQuery[BanTableDef].filter(d => d.id < 1000L)
     generateList(db withSession (implicit session => query.run))
   }
 
