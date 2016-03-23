@@ -20,6 +20,12 @@ class BanLogic(db: Database) {
     db withSession (implicit session => query.run)
   }
 
+  def persist(ban: Ban) = {
+    db withTransaction (implicit session => {
+      TableQuery[BanTableDef].insert(ban)
+    })
+  }
+
   private def generateList(list: Seq[Ban]): String = {
     val result = list.map {
       case d => d.toString

@@ -2,10 +2,9 @@ package com.example
 
 import akka.actor.Actor
 import com.example.logic.BanLogic
-import com.example.model._
+import com.example.model.Ban
 import spray.routing._
-
-import scala.slick.driver.MySQLDriver.simple._
+import com.example.model.BanJsonSupport._
 
 class WebService(banLogic: BanLogic) extends Actor with HttpService {
   def actorRefFactory = context
@@ -28,9 +27,19 @@ class WebService(banLogic: BanLogic) extends Actor with HttpService {
     path("dataCount") {
       get {
         complete {
-          banLogic.dataCount.toString
+          banLogic.dataCount.toString()
         }
       }
-    }
+    } ~
+    path("addData") {
+        post {
+          entity(as[Ban]) {
+            ban => {
+              banLogic.persist(ban)
+              complete("ok")
+            }
+          }
+        }
+      }
   )
 }
