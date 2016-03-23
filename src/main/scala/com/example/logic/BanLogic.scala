@@ -1,6 +1,7 @@
 package com.example.logic
 
 import com.example.model.{Ban, BanTableDef}
+import com.example.web.form.BanForm
 
 import scala.slick.driver.MySQLDriver.simple._
 
@@ -20,9 +21,9 @@ class BanLogic(db: Database) {
     db withSession (implicit session => query.run)
   }
 
-  def persist(ban: Ban) = {
+  def persistForm(banForm: BanForm) = {
     db withTransaction (implicit session => {
-      TableQuery[BanTableDef].insert(ban)
+      TableQuery[BanTableDef].insert(BanFactory.createEntity(banForm))
     })
   }
 

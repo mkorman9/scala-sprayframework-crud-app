@@ -1,10 +1,10 @@
-package com.example
+package com.example.web.service
 
 import akka.actor.Actor
 import com.example.logic.BanLogic
-import com.example.model.Ban
+import com.example.web.form.BanForm
 import spray.routing._
-import com.example.model.BanJsonSupport._
+import com.example.web.form.BanFormJsonSupport._
 
 class WebService(banLogic: BanLogic) extends Actor with HttpService {
   def actorRefFactory = context
@@ -33,9 +33,9 @@ class WebService(banLogic: BanLogic) extends Actor with HttpService {
     } ~
     path("addData") {
         post {
-          entity(as[Ban]) {
+          entity(as[BanForm]) {
             ban => {
-              banLogic.persist(ban)
+              banLogic.persistForm(ban)
               complete("ok")
             }
           }

@@ -2,6 +2,7 @@ package com.example
 
 import akka.actor.{Props, ActorSystem}
 import com.example.logic.BanLogic
+import com.example.web.service.WebService
 import slick.driver.MySQLDriver.simple._
 import spray.servlet.WebBoot
 
