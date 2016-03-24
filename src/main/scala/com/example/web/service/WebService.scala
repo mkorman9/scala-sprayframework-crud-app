@@ -1,12 +1,18 @@
 package com.example.web.service
 
+import javax.inject.{Singleton, Inject}
+
 import akka.actor.Actor
 import com.example.logic.BanLogic
 import com.example.web.form.BanForm
 import spray.routing._
 import com.example.web.form.BanFormJsonSupport._
 
-class WebService(banLogic: BanLogic) extends Actor with HttpService {
+trait WebService extends Actor with HttpService {
+}
+
+@Singleton
+class WebServiceImpl @Inject() (banLogic: BanLogic) extends WebService {
   def actorRefFactory = context
 
   def receive = runRoute(
@@ -32,14 +38,14 @@ class WebService(banLogic: BanLogic) extends Actor with HttpService {
       }
     } ~
     path("addData") {
-        post {
-          entity(as[BanForm]) {
-            ban => {
-              banLogic.persistForm(ban)
-              complete("ok")
-            }
+      post {
+        entity(as[BanForm]) {
+          ban => {
+            banLogic.persistForm(ban)
+            complete("ok")
           }
         }
       }
+    }
   )
 }
