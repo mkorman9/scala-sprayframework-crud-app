@@ -23,6 +23,7 @@ before_script:
   - cp ./.travis/context.xml ./apache-tomcat-7.0.68/conf
   - bash ./apache-tomcat-7.0.68/bin/startup.sh
   - mysql -e 'create database test;'
+  - mysql test < './.travis/schema.sql'
 
 script:
   - cp ./target/spray-test.war ./apache-tomcat-7.0.68/webapps
