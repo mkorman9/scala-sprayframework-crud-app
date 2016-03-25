@@ -2,6 +2,7 @@
 
 import sys
 import smoke.service_status
+import persistence.persistence
 
 
 TEST_PARAMETERS = {
@@ -9,7 +10,8 @@ TEST_PARAMETERS = {
 }
 
 TESTS = {
-    'Service status': smoke.service_status
+    'Service status': smoke.service_status,
+    'Data persistence': persistence.persistence
 }
 
 for t in TESTS:
