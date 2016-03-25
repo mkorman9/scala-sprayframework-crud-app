@@ -6,6 +6,5 @@ class MainModule extends ScalaModule {
   override def configure = {
     install(new AkkaModule())
     install(new DbModule())
-    install(new ServicesModule())
   }
 }

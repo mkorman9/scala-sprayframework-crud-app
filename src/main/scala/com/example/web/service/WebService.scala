@@ -5,9 +5,11 @@ import javax.inject.{Singleton, Inject}
 import akka.actor.Actor
 import com.example.logic.BanLogic
 import com.example.web.form.BanForm
+import com.google.inject.ImplementedBy
 import spray.routing._
 import com.example.web.form.BanFormJsonSupport._
 
+@ImplementedBy(classOf[WebServiceImpl])
 trait WebService extends Actor with HttpService {
 }
 

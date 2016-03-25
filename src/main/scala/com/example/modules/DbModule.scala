@@ -11,7 +11,7 @@ class DbModule extends ScalaModule {
   }
 
   @Provides @Singleton
-  def provideDatabase(injector: Injector) : Database = {
+  def provideDatabase(injector: Injector): Database = {
     Database.forName("java:comp/env/jdbc/baza")
   }
 }

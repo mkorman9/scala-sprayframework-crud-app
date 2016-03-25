@@ -11,7 +11,7 @@ class AkkaModule extends ScalaModule {
   }
 
   @Provides @Singleton
-  def provideActorSystem(injector: Injector) : ActorSystem = {
+  def provideActorSystem(injector: Injector): ActorSystem = {
     ActorSystem()
   }
 }

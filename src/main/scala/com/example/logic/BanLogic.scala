@@ -4,9 +4,11 @@ import javax.inject.{Singleton, Inject}
 
 import com.example.model.{Ban, BanTableDef}
 import com.example.web.form.BanForm
+import com.google.inject.ImplementedBy
 
 import scala.slick.driver.MySQLDriver.simple._
 
+@ImplementedBy(classOf[BanLogicImpl])
 trait BanLogic {
   def allData: String
   def dataWithIdLowerThan1000: String
@@ -15,7 +17,7 @@ trait BanLogic {
 }
 
 @Singleton
-class BanLogicImpl @Inject() (db: Database) extends BanLogic {
+class BanLogicImpl @Inject() (db: Database, banFactory: BanFactory) extends BanLogic {
   override def allData = {
     val query = TableQuery[BanTableDef]
     generateList(db withSession (implicit session => query.run))
@@ -33,7 +35,7 @@ class BanLogicImpl @Inject() (db: Database) extends BanLogic {
 
   override def persistForm(banForm: BanForm) = {
     db withTransaction (implicit session => {
-      TableQuery[BanTableDef].insert(BanFactory.createEntity(banForm))
+      TableQuery[BanTableDef].insert(banFactory.createEntity(banForm))
     })
   }
 
