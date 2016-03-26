@@ -26,7 +26,7 @@ class BanLogicImpl @Inject() (db: Database, banFactory: BanFactory) extends BanL
 
   override def dataWithIdLowerThan1000 = {
     val query = TableQuery[BanTableDef].filter(d => d.id < 1000L)
-    val result =  db withSession (implicit session => query.run)
+    val result = db withSession (implicit session => query.run)
     result.map(banFactory.createForm)
   }
 
