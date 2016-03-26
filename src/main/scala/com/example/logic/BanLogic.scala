@@ -1,8 +1,8 @@
 package com.example.logic
 
-import javax.inject.{Singleton, Inject}
+import javax.inject.{Inject, Singleton}
 
-import com.example.model.{Ban, BanTableDef}
+import com.example.model.BanTableDef
 import com.example.web.form.BanForm
 import com.google.inject.ImplementedBy
 
@@ -10,8 +10,8 @@ import scala.slick.driver.MySQLDriver.simple._
 
 @ImplementedBy(classOf[BanLogicImpl])
 trait BanLogic {
-  def allData: String
-  def dataWithIdLowerThan1000: String
+  def allData: Seq[BanForm]
+  def dataWithIdLowerThan1000: Seq[BanForm]
   def dataCount: Int
   def persistForm(banForm: BanForm): Unit
 }
@@ -20,12 +20,14 @@ trait BanLogic {
 class BanLogicImpl @Inject() (db: Database, banFactory: BanFactory) extends BanLogic {
   override def allData = {
     val query = TableQuery[BanTableDef]
-    generateList(db withSession (implicit session => query.run))
+    val result = db withSession (implicit session => query.run)
+    result.map(banFactory.createForm)
   }
 
   override def dataWithIdLowerThan1000 = {
     val query = TableQuery[BanTableDef].filter(d => d.id < 1000L)
-    generateList(db withSession (implicit session => query.run))
+    val result =  db withSession (implicit session => query.run)
+    result.map(banFactory.createForm)
   }
 
   override def dataCount = {
@@ -37,12 +39,5 @@ class BanLogicImpl @Inject() (db: Database, banFactory: BanFactory) extends BanL
     db withTransaction (implicit session => {
       TableQuery[BanTableDef].insert(banFactory.createEntity(banForm))
     })
-  }
-
-  private def generateList(list: Seq[Ban]): String = {
-    val result = list.map {
-      case d => d.toString
-    }.mkString(" ")
-    result
   }
 }
