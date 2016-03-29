@@ -8,7 +8,7 @@ def sendJson(url, data):
     return urllib2.urlopen(req)
 
 def addData(test_parameters, data):
-    f = sendJson('http://' + test_parameters['appserver_address'] + '/spray-test/add', data)
+    f = sendJson('http://' + test_parameters['appserver_address'] + '/spray-test/cats/add', data)
     result = False
     if f.getcode() == 200:
         result = True
@@ -16,7 +16,7 @@ def addData(test_parameters, data):
     return result
 
 def readSavedDataCount(test_parameters):
-    resp = urllib2.urlopen('http://' + test_parameters['appserver_address'] + '/spray-test/count')
+    resp = urllib2.urlopen('http://' + test_parameters['appserver_address'] + '/spray-test/cats/count')
     if resp.getcode() != 200:
         resp.close()
         return -1

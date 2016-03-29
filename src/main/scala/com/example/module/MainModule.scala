@@ -1,4 +1,4 @@
-package com.example.modules
+package com.example.module
 
 import net.codingwell.scalaguice.ScalaModule
 

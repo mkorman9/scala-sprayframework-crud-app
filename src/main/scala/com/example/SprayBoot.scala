@@ -1,7 +1,7 @@
 package com.example
 
 import akka.actor.{ActorSystem, Props}
-import com.example.modules.MainModule
+import com.example.module.MainModule
 import com.example.web.service.WebService
 import com.google.inject.Guice
 import spray.servlet.WebBoot

@@ -1,4 +1,4 @@
-package com.example.modules
+package com.example.module
 
 import javax.inject.Singleton
 
