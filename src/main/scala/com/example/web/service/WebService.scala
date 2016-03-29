@@ -13,63 +13,63 @@ trait WebService extends Actor with HttpService {
 }
 
 @Singleton
-class WebServiceImpl @Inject() (catLogic: CatLogic, catGroupLogic: CatGroupLogic) extends WebService {
+class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic) extends WebService {
   def actorRefFactory = context
 
   def receive = runRoute(
-    path("cats") {
+    path("cats" / "all") {
       import com.example.web.form.CatJsonSupport._
 
-      path("all") {
-        get {
-          complete {
-            catLogic.allCats
-          }
-        }
-      } ~
-      path("count") {
-        get {
-          complete {
-            catLogic.catsCount.toString()
-          }
-        }
-      } ~
-      path("add") {
-        post {
-          entity(as[CatInputForm]) {
-            cat => {
-              catLogic.persistCat(cat)
-              complete("ok")
-            }
-          }
+      get {
+        complete {
+          catLogic.allCats
         }
       }
     } ~
+    path("cats" / "count") {
+      get {
+        complete {
+          catLogic.catsCount.toString()
+        }
+      }
+    } ~
+    path("cats" / "add") {
+      import com.example.web.form.CatJsonSupport._
 
-    path("groups") {
+      post {
+         entity(as[CatInputForm]) {
+           cat => {
+             catLogic.persistCat(cat)
+             complete("ok")
+           }
+         }
+      }
+    } ~
+
+    path("groups" / "all") {
       import com.example.web.form.CatGroupJsonSupport._
 
-      path("all") {
-        get {
-          complete {
-            catGroupLogic.allGroups
-          }
+      get {
+        complete {
+          catGroupLogic.allGroups
         }
-      } ~
-      path("count") {
-        get {
-          complete {
-            catGroupLogic.groupsCount.toString()
-          }
+      }
+    } ~
+    path("groups" / "count") {
+      get {
+        complete {
+          catGroupLogic.groupsCount.toString()
         }
-      } ~
-      path("add") {
-        post {
-          entity(as[CatGroupInputForm]) {
-            group => {
-              catGroupLogic.persistGroup(group)
-              complete("ok")
-            }
+      }
+    } ~
+    path("groups" / "add") {
+      import com.example.web.form.CatGroupJsonSupport._
+
+      post {
+        entity(as[CatGroupInputForm]) {
+          group => {
+            catGroupLogic.persistGroup(group)
+            complete("ok")
           }
         }
       }
