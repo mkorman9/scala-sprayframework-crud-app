@@ -42,6 +42,7 @@ class WebServiceImpl @Inject() (catLogic: CatLogic, catGroupLogic: CatGroupLogic
         }
       }
     } ~
+
     path("groups" / "all") {
       get {
         complete {

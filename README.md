@@ -6,7 +6,9 @@ App relies on MySQL database. It all serves as a REST webservice for managing ca
 It's meant to be deployed on Tomcat web container containing definition of resource named "java:comp/env/jdbc/db".
 
 ## Structure
-The main concept of architecture is to split "domain models" from "forms". Form is a user-friendly representation of object stored in database, ready to convert to JSON and send between server and browser.
+The main concept of architecture is to split "domain models" from "forms". 
+Form is a user-friendly representation of object stored in database, ready to convert to JSON and send between server and browser.
+Form can be input or output. Input form is used by browser to serialize input data and send it to server, output form is used in opposite case
 
 
 .   
@@ -22,7 +24,9 @@ The main concept of architecture is to split "domain models" from "forms". Form 
 │   │   │           ├── SprayBoot.scala - **Main project class**   
 │   │   │           ├── logic   
 │   │   │           │   ├── CatFactory.scala - **Factory used to convert between domain model definitions and "forms"**   
+│   │   │           │   ├── CatGroupFactory.scala - **Same as above**  
 │   │   │           │   └── CatLogic.scala - **Transactional logic used to access data stored in database**   
+│   │   │           │   └── CatGroupLogic.scala - **Same as above**  
 │   │   │           ├── model   
 │   │   │           │   ├── Cat.scala - **Definition of domain model "Cat" and it's database mappings**   
 │   │   │           │   └── CatGroup.scala - **Same for "CatGroup"**   

@@ -2,14 +2,14 @@ package com.example.logic
 
 import java.sql.Timestamp
 
-import com.example.logic.factory.{CatGroupFactoryImpl, CatGroupFactory, CatFactoryImpl}
-import com.example.model.{CatGroup, Cat}
-import com.example.web.form.{CatGroupOutputForm, CatInputForm}
+import com.example.logic.factory.CatFactoryImpl
+import com.example.model.Cat
+import com.example.web.form.CatInputForm
 import org.joda.time.DateTime
 import org.scalatest.{FlatSpec, Matchers}
 
 class CatFactoryTest extends FlatSpec with Matchers {
-  val catFactory = new CatFactoryImpl(new CatGroupFactoryImpl())
+  val catFactory = new CatFactoryImpl()
 
   "Form" should "be converted to entity" in {
     val name = "Meow"
