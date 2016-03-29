@@ -4,7 +4,7 @@ import javax.inject.{Singleton, Inject}
 
 import akka.actor.Actor
 import com.example.logic.CatLogic
-import com.example.web.form.CatForm
+import com.example.web.form.CatInputForm
 import com.google.inject.ImplementedBy
 import spray.routing._
 import com.example.web.form.CatJsonSupport._
@@ -41,7 +41,7 @@ class WebServiceImpl @Inject() (catLogic: CatLogic) extends WebService {
     } ~
     path("add") {
       post {
-        entity(as[CatForm]) {
+        entity(as[CatInputForm]) {
           cat => {
             catLogic.persistForm(cat)
             complete("ok")

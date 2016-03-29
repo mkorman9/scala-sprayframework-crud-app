@@ -4,20 +4,20 @@ import java.sql.Timestamp
 import javax.inject.Singleton
 
 import com.example.model.{CatGroup, Cat}
-import com.example.web.form.{CatGroupForm, CatForm}
+import com.example.web.form.{CatOutputForm, CatGroupOutputForm, CatInputForm}
 import com.google.inject.ImplementedBy
 import org.joda.time.DateTime
 
 @ImplementedBy(classOf[CatFactoryImpl])
 trait CatFactory {
-  def createEntity(catForm: CatForm): Cat
-  def createForm(cat: Cat): CatForm
+  def createEntity(catForm: CatInputForm): Cat
+  def createForm(cat: Cat): CatOutputForm
 }
 
 @Singleton
 class CatFactoryImpl extends CatFactory {
 
-  override def createEntity(catForm: CatForm): Cat = {
+  override def createEntity(catForm: CatInputForm): Cat = {
     new Cat(None,
       catForm.name,
       catForm.groupId,
@@ -25,9 +25,9 @@ class CatFactoryImpl extends CatFactory {
     )
   }
 
-  override def createForm(cat: Cat): CatForm = {
-    new CatForm(cat.name,
-      cat.groupId,
+  override def createForm(cat: Cat): CatOutputForm = {
+    new CatOutputForm(cat.name,
+      new CatGroupOutputForm(cat.groupId, ""), // TODO
       new DateTime(cat.birthDate.getTime)
     )
   }

@@ -3,7 +3,7 @@ package com.example.logic
 import java.sql.Timestamp
 
 import com.example.model.{CatGroup, Cat}
-import com.example.web.form.{CatGroupForm, CatForm}
+import com.example.web.form.{CatGroupOutputForm, CatInputForm}
 import org.joda.time.DateTime
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -14,7 +14,7 @@ class CatFactoryTest extends FlatSpec with Matchers {
     val name = "Meow"
     val groupId: Long = 1
     val birthDate = new DateTime(10000)
-    val form = new CatForm(name, groupId, birthDate)
+    val form = new CatInputForm(name, groupId, birthDate)
 
     val entity = catFactory.createEntity(form)
 
