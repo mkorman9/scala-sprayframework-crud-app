@@ -10,42 +10,42 @@ The main concept of architecture is to split "domain models" from "forms". Form 
 
 
 .   
-├── pom.xml - Standard Maven build descriptor   
+├── pom.xml - **Standard Maven build descriptor**   
 ├── src   
 │   ├── main   
 │   │   ├── resources   
-│   │   │   ├── application.conf - Scala settings   
-│   │   │   └── logback.xml - Definition of loggers, Tomcat /logs/ directory is used   
+│   │   │   ├── application.conf - **Scala settings**   
+│   │   │   └── logback.xml - **Definition of loggers, Tomcat /logs/ directory is used**   
 │   │   ├── scala   
 │   │   │   └── com   
 │   │   │       └── example   
-│   │   │           ├── SprayBoot.scala - Main project class   
+│   │   │           ├── SprayBoot.scala - **Main project class**   
 │   │   │           ├── logic   
-│   │   │           │   ├── CatFactory.scala - Factory used to convert between domain model definitions and "forms"   
-│   │   │           │   └── CatLogic.scala - Transactional logic used to access data stored in database   
+│   │   │           │   ├── CatFactory.scala - **Factory used to convert between domain model definitions and "forms"**   
+│   │   │           │   └── CatLogic.scala - **Transactional logic used to access data stored in database**   
 │   │   │           ├── model   
-│   │   │           │   ├── Cat.scala - Definition of domain model "Cat" and it's database mappings   
-│   │   │           │   └── CatGroup.scala - Same for "CatGroup"   
+│   │   │           │   ├── Cat.scala - **Definition of domain model "Cat" and it's database mappings**   
+│   │   │           │   └── CatGroup.scala - **Same for "CatGroup"**   
 │   │   │           ├── modules   
-│   │   │           │   ├── AkkaModule.scala - Initialization of Akka specific "beans"   
-│   │   │           │   ├── DbModule.scala - Initialization of database specific "beans"   
-│   │   │           │   └── MainModule.scala - Aggregator for modules   
+│   │   │           │   ├── AkkaModule.scala - **Initialization of Akka specific "beans"**   
+│   │   │           │   ├── DbModule.scala - **Initialization of database specific "beans"**   
+│   │   │           │   └── MainModule.scala - **Aggregator for modules**   
 │   │   │           ├── util   
-│   │   │           │   └── DateTimeJSONFormat.scala - Converter between Joda's DateTime and javax.sql.Timestamp (util class)   
+│   │   │           │   └── DateTimeJSONFormat.scala - **Converter between Joda's DateTime and javax.sql.Timestamp (util class)**   
 │   │   │           └── web   
 │   │   │               ├── form   
-│   │   │               │   └── CatForm.scala - Definitions of "forms"   
+│   │   │               │   └── CatForm.scala - **Definitions of "forms"**   
 │   │   │               └── service   
-│   │   │                   └── WebService.scala - Web service endpoint   
+│   │   │                   └── WebService.scala - **Web service endpoint**   
 │   │   └── webapp   
 │   │       └── WEB-INF   
-│   │           └── web.xml - webapp descriptor   
+│   │           └── web.xml - **webapp descriptor**   
 │   └── test   
 │       ├── integration   
 │       └── scala   
 │           └── com   
 │               └── example   
 │                   └── logic   
-│                       └── CatFactoryTest.scala - Sample unit test for CatFactory   
+│                       └── CatFactoryTest.scala - **Sample unit test for CatFactory**   
 .   
 
