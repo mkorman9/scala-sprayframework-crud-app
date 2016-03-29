@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <appender name="ovh.mihau.springtest.debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="com.example.debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${catalina.home}/logs/spray_debug.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern>
@@ -23,7 +23,7 @@
         </filter>
     </appender>
 
-    <appender name="ovh.mihau.springtest.error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="com.example.error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${catalina.home}/logs/spray_error.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern>
@@ -47,8 +47,8 @@
     </appender>
 
     <root level="ALL">
-        <appender-ref ref="ovh.mihau.springtest.debug" />
-        <appender-ref ref="ovh.mihau.springtest.error" />
+        <appender-ref ref="com.example.debug" />
+        <appender-ref ref="com.example.error" />
     </root>
 
 </configuration>

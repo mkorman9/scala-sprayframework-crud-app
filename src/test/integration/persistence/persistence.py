@@ -8,7 +8,7 @@ def sendJson(url, data):
     return urllib2.urlopen(req)
 
 def addData(test_parameters, data):
-    f = sendJson('http://' + test_parameters['appserver_address'] + '/spray-test/addData', data)
+    f = sendJson('http://' + test_parameters['appserver_address'] + '/spray-test/add', data)
     result = False
     if f.getcode() == 200:
         result = True
@@ -16,7 +16,7 @@ def addData(test_parameters, data):
     return result
 
 def readSavedDataCount(test_parameters):
-    resp = urllib2.urlopen('http://' + test_parameters['appserver_address'] + '/spray-test/dataCount')
+    resp = urllib2.urlopen('http://' + test_parameters['appserver_address'] + '/spray-test/count')
     if resp.getcode() != 200:
         resp.close()
         return -1
@@ -27,9 +27,9 @@ def readSavedDataCount(test_parameters):
 def run(test_parameters):
     dataBefore = readSavedDataCount(test_parameters)
 
-    addData(test_parameters, '{"bannedUserId":0,"banAuthorId":2,"created":"2015-08-18T13:37:31-08:00","lifted":"2016-03-16T13:36:32-08:00"}')
-    addData(test_parameters, '{"bannedUserId":1,"banAuthorId":10,"created":"2013-11-16T13:36:32-08:00","lifted":"2016-03-16T13:36:32-08:00"}')
-    addData(test_parameters, '{"bannedUserId":4,"banAuthorId":5,"created":"2012-03-17T14:36:32-08:00","lifted":"2016-03-16T13:36:32-08:00"}')
+    addData(test_parameters, '{"name":"Jack","groupId":2,"birthDate":"2015-08-18T13:38:21-08:00"}')
+    addData(test_parameters, '{"name":"Frank","groupId":1,"birthDate":"2015-08-18T13:37:31-08:00"}')
+    addData(test_parameters, '{"name":"Sussie","groupId":2,"birthDate":"2015-08-18T21:37:00-08:00"}')
 
     dataAfter = readSavedDataCount(test_parameters)
 

@@ -3,47 +3,47 @@ package com.example.web.service
 import javax.inject.{Singleton, Inject}
 
 import akka.actor.Actor
-import com.example.logic.BanLogic
-import com.example.web.form.BanForm
+import com.example.logic.CatLogic
+import com.example.web.form.CatForm
 import com.google.inject.ImplementedBy
 import spray.routing._
-import com.example.web.form.BanFormJsonSupport._
+import com.example.web.form.CatJsonSupport._
 
 @ImplementedBy(classOf[WebServiceImpl])
 trait WebService extends Actor with HttpService {
 }
 
 @Singleton
-class WebServiceImpl @Inject() (banLogic: BanLogic) extends WebService {
+class WebServiceImpl @Inject() (catLogic: CatLogic) extends WebService {
   def actorRefFactory = context
 
   def receive = runRoute(
-    path("allData") {
+    path("all") {
       get {
         complete {
-          banLogic.allData
+          catLogic.allCats
         }
       }
     } ~
-    path("dataWithIdLowerThan1000") {
+    path("catsWithNameStartingWithA") {
       get {
         complete {
-          banLogic.dataWithIdLowerThan1000
+          catLogic.catsWithNameStartingWithA
         }
       }
     } ~
-    path("dataCount") {
+    path("count") {
       get {
         complete {
-          banLogic.dataCount.toString()
+          catLogic.dataCount.toString()
         }
       }
     } ~
-    path("addData") {
+    path("add") {
       post {
-        entity(as[BanForm]) {
-          ban => {
-            banLogic.persistForm(ban)
+        entity(as[CatForm]) {
+          cat => {
+            catLogic.persistForm(cat)
             complete("ok")
           }
         }
