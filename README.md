@@ -1,4 +1,4 @@
-![build status](https://travis-ci.org/mkorman9/spray-test.svg?branch=master)
+![build status](https://travis-ci.org/mkorman9/scala-sprayframework-crud-app.svg?branch=master)
 
 ## Intro
 Sample app using Scala and Spray Framework. Slick library is used for database mapping. Dependency injection is done via Guice.
