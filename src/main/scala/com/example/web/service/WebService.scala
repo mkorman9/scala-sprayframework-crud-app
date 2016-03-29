@@ -7,7 +7,6 @@ import com.example.logic.{CatGroupLogic, CatLogic}
 import com.example.web.form.{CatGroupInputForm, CatInputForm}
 import com.google.inject.ImplementedBy
 import spray.routing._
-import com.example.web.form.CatJsonSupport._
 
 @ImplementedBy(classOf[WebServiceImpl])
 trait WebService extends Actor with HttpService {
@@ -18,46 +17,53 @@ class WebServiceImpl @Inject() (catLogic: CatLogic, catGroupLogic: CatGroupLogic
   def actorRefFactory = context
 
   def receive = runRoute(
-    path("cats" / "all") {
-      get {
-        complete {
-          catLogic.allCats
+    path("cats") {
+      import com.example.web.form.CatJsonSupport._
+
+      path("all") {
+        get {
+          complete {
+            catLogic.allCats
+          }
         }
-      }
-    } ~
-    path("cats" / "count") {
-      get {
-        complete {
-          catLogic.catsCount.toString()
+      } ~
+      path("count") {
+        get {
+          complete {
+            catLogic.catsCount.toString()
+          }
         }
-      }
-    } ~
-    path("cats" / "add") {
-      post {
-        entity(as[CatInputForm]) {
-          cat => {
-            catLogic.persistCat(cat)
-            complete("ok")
+      } ~
+      path("add") {
+        post {
+          entity(as[CatInputForm]) {
+            cat => {
+              catLogic.persistCat(cat)
+              complete("ok")
+            }
           }
         }
       }
     } ~
 
-    path("groups" / "all") {
-      get {
-        complete {
-          catGroupLogic.allGroups
+    path("groups") {
+      import com.example.web.form.CatGroupJsonSupport._
+
+      path("all") {
+        get {
+          complete {
+            catGroupLogic.allGroups
+          }
         }
-      }
-    } ~
-      path("groups" / "count") {
+      } ~
+      path("count") {
         get {
           complete {
             catGroupLogic.groupsCount.toString()
           }
         }
       } ~
-      path("groups" / "add") {
+      path("add") {
         post {
           entity(as[CatGroupInputForm]) {
             group => {
@@ -67,5 +73,6 @@ class WebServiceImpl @Inject() (catLogic: CatLogic, catGroupLogic: CatGroupLogic
           }
         }
       }
+    }
   )
 }

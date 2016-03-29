@@ -16,40 +16,16 @@ Form can be input or output. Input form is used by browser to serialize input da
 ├── src   
 │   ├── main   
 │   │   ├── resources   
-│   │   │   ├── application.conf - **Scala settings**   
-│   │   │   └── logback.xml - **Definition of loggers, Tomcat /logs/ directory is used**   
 │   │   ├── scala   
 │   │   │   └── com   
-│   │   │       └── example   
-│   │   │           ├── SprayBoot.scala - **Main project class**   
-│   │   │           ├── logic   
-│   │   │           │   ├── CatFactory.scala - **Factory used to convert between domain model definitions and "forms"**   
-│   │   │           │   ├── CatGroupFactory.scala - **Same as above**  
-│   │   │           │   └── CatLogic.scala - **Transactional logic used to access data stored in database**   
-│   │   │           │   └── CatGroupLogic.scala - **Same as above**  
-│   │   │           ├── model   
-│   │   │           │   ├── Cat.scala - **Definition of domain model "Cat" and it's database mappings**   
-│   │   │           │   └── CatGroup.scala - **Same for "CatGroup"**   
-│   │   │           ├── modules   
-│   │   │           │   ├── AkkaModule.scala - **Initialization of Akka specific "beans"**   
-│   │   │           │   ├── DbModule.scala - **Initialization of database specific "beans"**   
-│   │   │           │   └── MainModule.scala - **Aggregator for modules**   
-│   │   │           ├── util   
-│   │   │           │   └── DateTimeJSONFormat.scala - **Converter between Joda's DateTime and javax.sql.Timestamp (util class)**   
+│   │   │       └── example     
+│   │   │           ├── logic - **Transactional and domain logic**  
+│   │   │           ├── model - **Domain models**    
+│   │   │           ├── modules - **Configuration modules**    
+│   │   │           ├── util - **Utility classes**   
 │   │   │           └── web   
-│   │   │               ├── form   
-│   │   │               │   └── CatForm.scala - **Definitions of "forms"**   
-│   │   │               └── service   
-│   │   │                   └── WebService.scala - **Web service endpoint**   
-│   │   └── webapp   
-│   │       └── WEB-INF   
-│   │           └── web.xml - **webapp descriptor**   
+│   │   │               ├── form - **Forms definitions**   
+│   │   │               └── service - **Web service endpoints**    
+│   │   └── webapp - **webapp content**   
 │   └── test   
-│       ├── integration   
-│       └── scala   
-│           └── com   
-│               └── example   
-│                   └── logic   
-│                       └── CatFactoryTest.scala - **Sample unit test for CatFactory**   
 .   
-
