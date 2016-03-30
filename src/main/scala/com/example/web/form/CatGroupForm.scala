@@ -4,6 +4,11 @@ import com.example.util.DateTimeJSONFormat
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
 
+/*
+  CatGroupInputForm - form used to receive CatGroup's data from client
+  CatGroupOutputForm - form used to send CatGroup's data to client
+*/
+
 case class CatGroupInputForm(name: String)
 
 case class CatGroupOutputForm(name: String,

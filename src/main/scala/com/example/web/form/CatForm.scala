@@ -5,6 +5,11 @@ import org.joda.time.DateTime
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
 
+/*
+  CatInputForm - form used to receive new Cat from client
+  CatOutputForm - form used to send Cat's data to client
+*/
+
 case class CatInputForm(name: String,
                         groupId: Long,
                         birthDate: DateTime)

@@ -6,6 +6,10 @@ import com.example.model.{Cat, CatGroup}
 import com.example.web.form.{CatGroupInputForm, CatGroupOutputForm}
 import com.google.inject.{Inject, ImplementedBy}
 
+/*
+  Provides conversion between domain model of CatGroup and it's serializable representation (form)
+*/
+
 @ImplementedBy(classOf[CatGroupFactoryImpl])
 trait CatGroupFactory {
   def createEntity(catGroupForm: CatGroupInputForm): CatGroup

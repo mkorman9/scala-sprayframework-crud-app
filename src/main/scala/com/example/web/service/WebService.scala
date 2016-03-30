@@ -8,6 +8,11 @@ import com.example.web.form.{CatGroupInputForm, CatInputForm}
 import com.google.inject.ImplementedBy
 import spray.routing._
 
+/*
+  Definition of webservice routes
+  Relies on transactional logic
+*/
+
 @ImplementedBy(classOf[WebServiceImpl])
 trait WebService extends Actor with HttpService {
 }
@@ -39,7 +44,7 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
           entity(as[CatInputForm]) {
             cat => {
               catLogic.persistCat(cat)
-              complete("ok")
+              complete("{\"status\": \"ok\"}")
             }
           }
         }
@@ -68,7 +73,7 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
           entity(as[CatGroupInputForm]) {
             group => {
               catGroupLogic.persistGroup(group)
-              complete("ok")
+              complete("{\"status\": \"ok\"}")
             }
           }
         }

@@ -2,6 +2,10 @@ package com.example.model
 
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+  Domain model of CatGroup
+*/
+
 case class CatGroup(id: Option[Long],
                     name: String)
 

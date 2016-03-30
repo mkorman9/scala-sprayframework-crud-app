@@ -4,6 +4,8 @@ import sys
 import smoke.service_status
 import persistence.persistence
 
+# Integration tests
+# Executed by TravisCI after each push
 
 TEST_PARAMETERS = {
     'appserver_address': 'localhost:8080'

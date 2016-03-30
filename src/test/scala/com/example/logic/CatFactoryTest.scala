@@ -8,6 +8,10 @@ import com.example.web.form.CatInputForm
 import org.joda.time.DateTime
 import org.scalatest.{FlatSpec, Matchers}
 
+/*
+  Example of unit test without mocks
+*/
+
 class CatFactoryTest extends FlatSpec with Matchers {
   val catFactory = new CatFactoryImpl()
 

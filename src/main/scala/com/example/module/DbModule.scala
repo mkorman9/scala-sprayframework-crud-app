@@ -6,6 +6,10 @@ import com.google.inject.{Injector, Provides}
 import net.codingwell.scalaguice.ScalaModule
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+  Data source definition retrieved from JNDI tree, ready to inject via Guice
+*/
+
 class DbModule extends ScalaModule {
   override def configure = {
   }

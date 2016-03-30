@@ -9,6 +9,10 @@ import com.google.inject.ImplementedBy
 
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+  Transactional logic providing access to Cats stored in database
+*/
+
 @ImplementedBy(classOf[CatLogicImpl])
 trait CatLogic {
   def allCats: Seq[CatOutputForm]

@@ -4,6 +4,10 @@ import java.sql.Timestamp
 
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+  Domain model of Cat
+*/
+
 case class Cat(id: Option[Long],
                name: String,
                groupId: Long,

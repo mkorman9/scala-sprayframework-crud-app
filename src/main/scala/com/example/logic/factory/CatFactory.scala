@@ -8,6 +8,10 @@ import com.example.web.form.{CatInputForm, CatOutputForm}
 import com.google.inject.ImplementedBy
 import org.joda.time.DateTime
 
+/*
+  Provides conversion between domain model of Cat and it's serializable representation (form)
+*/
+
 @ImplementedBy(classOf[CatFactoryImpl])
 trait CatFactory {
   def createEntity(catForm: CatInputForm): Cat

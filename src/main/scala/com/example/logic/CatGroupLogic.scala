@@ -9,6 +9,10 @@ import com.google.inject.ImplementedBy
 
 import scala.slick.driver.MySQLDriver.simple._
 
+/*
+  Transactional logic providing access to CatGroups stored in database
+*/
+
 @ImplementedBy(classOf[CatGroupLogicImpl])
 trait CatGroupLogic {
   def allGroups: Seq[CatGroupOutputForm]
