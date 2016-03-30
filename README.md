@@ -1,10 +1,20 @@
 ![build status](https://travis-ci.org/mkorman9/scala-sprayframework-crud-app.svg?branch=master)
 
 ## Intro
-Sample app using Scala and Spray Framework. Slick library is used for database mapping. Dependency injection is done via Guice.
-App relies on MySQL database. It all serves as a REST webservice for managing cats and groups of cats (just as an example of typical CRUD app).
-It's meant to be deployed on Tomcat web container containing definition of resource named "java:comp/env/jdbc/db".
-Maven is used as building tool.
+Sample CRUD application for managing cats and groups of cats, written in Scala. It's meant to be an example and the entry point for future projects.
+
+
+#### Technology stack 
+**HTTP toolkit**: Spray Framework   
+**Database mapping**: Slick   
+**Dependency injection**: Guice   
+**RDBMS**: MySQL   
+**Servlet container**: Tomcat 7   
+**Build tool**: Maven
+
+
+In order to deploy app, datasource is required to be defined in JNDI tree as "java:comp/env/jdbc/db"
+
 
 ## Structure
 The main concept of architecture is to split "domain models" from "forms". 
@@ -13,6 +23,7 @@ Form can be input or output. Input form is used by browser to serialize input da
 
 
 .   
+├── .travis - **Resources used during integration tests, database schema is included here**   
 ├── pom.xml - **Standard Maven build descriptor**   
 ├── src   
 │   ├── main   
