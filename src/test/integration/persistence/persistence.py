@@ -47,8 +47,8 @@ def testCats(test_parameters):
 
 def testGroups(test_parameters):
     groupsBefore = getSavedGroupsNumber(test_parameters)
-    addCat(test_parameters, '{"name":"Pirates"}')
-    addCat(test_parameters, '{"name":"Corsairs"}')
+    addGroup(test_parameters, '{"name":"Pirates"}')
+    addGroup(test_parameters, '{"name":"Corsairs"}')
     groupsAfter = getSavedGroupsNumber(test_parameters)
     return (groupsBefore + 2) == groupsAfter
 
