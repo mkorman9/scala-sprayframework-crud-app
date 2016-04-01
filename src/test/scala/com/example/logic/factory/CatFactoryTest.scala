@@ -1,8 +1,7 @@
-package com.example.logic
+package com.example.logic.factory
 
 import java.sql.Timestamp
 
-import com.example.logic.factory.CatFactoryImpl
 import com.example.model.Cat
 import com.example.web.form.CatInputForm
 import org.joda.time.DateTime

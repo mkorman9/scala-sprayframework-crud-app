@@ -1,10 +1,9 @@
-package com.example.logic
+package com.example.logic.factory
 
 import java.sql.Timestamp
 
-import com.example.logic.factory.{CatFactory, CatGroupFactoryImpl}
 import com.example.model.{Cat, CatGroup}
-import com.example.web.form.{CatOutputForm, CatGroupInputForm}
+import com.example.web.form.{CatGroupInputForm, CatOutputForm}
 import org.joda.time.DateTime
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.{FlatSpec, Matchers}
