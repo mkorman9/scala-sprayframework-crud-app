@@ -26,13 +26,13 @@ class CatLogicImpl @Inject()(db: Database, catFactory: CatFactory) extends CatLo
   override def allCats = {
     val query = TableQuery[Cats]
     val result = db withSession (implicit session => query.run)
-    result.map(catFactory.createForm)
+    result map catFactory.createForm
   }
 
   override def catsWithNameStartingWithA = {
     val query = TableQuery[Cats].filter(c => c.name like "A%")
     val result = db withSession (implicit session => query.run)
-    result.map(catFactory.createForm)
+    result map catFactory.createForm
   }
 
   override def catsCount = {
