@@ -13,5 +13,6 @@ object JsonSupport extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val CatGroupInputFormat = jsonFormat1(CatGroupInputForm)
   implicit val CatGroupOutputFormat = jsonFormat2(CatGroupOutputForm)
 
-  implicit val StatusFormFormFormat = jsonFormat1(StatusForm)
+  implicit val StatusFormat = jsonFormat1(StatusForm)
+  implicit val SetGroupFormat = jsonFormat2(SetGroupForm)
 }

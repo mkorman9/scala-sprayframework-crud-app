@@ -4,7 +4,7 @@ import javax.inject.{Singleton, Inject}
 
 import akka.actor.Actor
 import com.example.logic.{CatGroupLogic, CatLogic}
-import com.example.web.form.{StatusForm, CatGroupInputForm, CatInputForm}
+import com.example.web.form.{SetGroupForm, StatusForm, CatGroupInputForm, CatInputForm}
 import com.google.inject.ImplementedBy
 import spray.routing._
 import com.example.web.form.JsonSupport._
@@ -70,6 +70,16 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
           entity(as[CatGroupInputForm]) {
             group => {
               catGroupLogic.persistGroup(group)
+              complete(new StatusForm("ok"))
+            }
+          }
+        }
+      } ~
+      path("set") {
+        post {
+          entity(as[SetGroupForm]) {
+            setGroupForm => {
+              catGroupLogic.setGroupForCat(setGroupForm)
               complete(new StatusForm("ok"))
             }
           }
