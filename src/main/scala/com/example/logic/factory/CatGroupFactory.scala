@@ -21,11 +21,12 @@ class CatGroupFactoryImpl @Inject() (catFactory: CatFactory) extends CatGroupFac
 
   override def createEntity(catGroupForm: CatGroupInputForm): CatGroup = {
     new CatGroup(None,
-                 catGroupForm.name)
+      catGroupForm.name)
   }
 
   override def createForm(catGroup: CatGroup, catsListResolver: (Long => Seq[Cat])): CatGroupOutputForm = {
+    val catsInGroup: Seq[Cat] = catsListResolver(catGroup.id.get)
     new CatGroupOutputForm(catGroup.name,
-                           catsListResolver(catGroup.id.get).map(catFactory.createForm))
+                      catsInGroup map catFactory.createForm)
   }
 }
