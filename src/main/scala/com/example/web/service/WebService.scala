@@ -4,9 +4,10 @@ import javax.inject.{Singleton, Inject}
 
 import akka.actor.Actor
 import com.example.logic.{CatGroupLogic, CatLogic}
-import com.example.web.form.{CatGroupInputForm, CatInputForm}
+import com.example.web.form.{StatusForm, CatGroupInputForm, CatInputForm}
 import com.google.inject.ImplementedBy
 import spray.routing._
+import com.example.web.form.JsonSupport._
 
 /*
   Definition of webservice routes
@@ -23,8 +24,6 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
 
   def receive = runRoute(
     pathPrefix("cats") {
-      import com.example.web.form.CatJsonSupport._
-
       path("all") {
         get {
           complete {
@@ -44,7 +43,7 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
           entity(as[CatInputForm]) {
             cat => {
               catLogic.persistCat(cat)
-              complete("{\"status\": \"ok\"}")
+              complete(new StatusForm("ok"))
             }
           }
         }
@@ -52,8 +51,6 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
     } ~
 
     pathPrefix("groups") {
-      import com.example.web.form.CatGroupJsonSupport._
-
       path("all") {
         get {
           complete {
@@ -73,7 +70,7 @@ class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic)
           entity(as[CatGroupInputForm]) {
             group => {
               catGroupLogic.persistGroup(group)
-              complete("{\"status\": \"ok\"}")
+              complete(new StatusForm("ok"))
             }
           }
         }
