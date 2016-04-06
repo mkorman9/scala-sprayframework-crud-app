@@ -23,29 +23,20 @@ trait CatGroupLogic {
 
 @Singleton
 class CatGroupLogicImpl @Inject() (db: Database, catGroupFactory: CatGroupFactory) extends CatGroupLogic {
-  override def allGroups = {
-    val query = TableQuery[CatGroups]
-    val result = db withSession (implicit session => query.run)
-    db withSession (implicit session => {
-      val catsListResolver = (groupId: Long) => TableQuery[Cats].filter(_.groupId === groupId).run
-      result map (catGroupFactory.createForm(_, catsListResolver))
-    })
-  }
+  override def allGroups = db withSession (implicit session => {
+    val catsListResolver = (groupId: Long) => TableQuery[Cats].filter(_.groupId === groupId).run
+    TableQuery[CatGroups].run map (catGroupFactory.createForm(_, catsListResolver))
+  })
 
-  override def groupsCount = {
-    val query = TableQuery[CatGroups].size
-    db withSession (implicit session => query.run)
-  }
+  override def groupsCount = db withSession (implicit session => {
+    TableQuery[CatGroups].size.run
+  })
 
-  override def persistGroup(groupForm: CatGroupInputForm) = {
-    db withTransaction (implicit session => {
-      TableQuery[CatGroups].insert(catGroupFactory.createEntity(groupForm))
-    })
-  }
+  override def persistGroup(groupForm: CatGroupInputForm) = db withTransaction (implicit session => {
+    TableQuery[CatGroups].insert(catGroupFactory.createEntity(groupForm))
+  })
 
-  override def setGroupForCat(setGroupForm: SetGroupForm): Unit = {
-    db withTransaction (implicit session => {
-      TableQuery[Cats].filter(_.id === setGroupForm.catId).map(g => g.groupId).update(setGroupForm.groupId)
-    })
-  }
+  override def setGroupForCat(setGroupForm: SetGroupForm): Unit = db withTransaction (implicit session => {
+    TableQuery[Cats].filter(_.id === setGroupForm.catId).map(g => g.groupId).update(setGroupForm.groupId)
+  })
 }

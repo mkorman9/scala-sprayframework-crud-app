@@ -23,26 +23,20 @@ trait CatLogic {
 
 @Singleton
 class CatLogicImpl @Inject() (db: Database, catFactory: CatFactory) extends CatLogic {
-  override def allCats = {
-    val query = TableQuery[Cats]
-    val result = db withSession (implicit session => query.run)
+  override def allCats = db withSession (implicit session => {
+    TableQuery[Cats].run map catFactory.createForm
+  })
+
+  override def catsWithNameStartingWithA = db withSession (implicit session => {
+    val result = TableQuery[Cats].filter(_.name like "A%").run
     result map catFactory.createForm
-  }
+  })
 
-  override def catsWithNameStartingWithA = {
-    val query = TableQuery[Cats].filter(_.name like "A%")
-    val result = db withSession (implicit session => query.run)
-    result map catFactory.createForm
-  }
+  override def catsCount = db withSession (implicit session => {
+    TableQuery[Cats].size.run
+  })
 
-  override def catsCount = {
-    val query = TableQuery[Cats].size
-    db withSession (implicit session => query.run)
-  }
-
-  override def persistCat(catForm: CatInputForm) = {
-    db withTransaction (implicit session => {
-      TableQuery[Cats].insert(catFactory.createEntity(catForm))
-    })
-  }
+  override def persistCat(catForm: CatInputForm) = db withSession (implicit session => {
+    TableQuery[Cats].insert(catFactory.createEntity(catForm))
+  })
 }
