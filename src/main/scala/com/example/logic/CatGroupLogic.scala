@@ -26,9 +26,10 @@ class CatGroupLogicImpl @Inject() (db: Database, catGroupFactory: CatGroupFactor
   override def allGroups = {
     val query = TableQuery[CatGroups]
     val result = db withSession (implicit session => query.run)
-    val catsListResolver =
-      (groupId: Long) => db withSession (implicit session => TableQuery[Cats].filter(_.groupId === groupId).run)
-    result map (catGroupFactory.createForm(_, catsListResolver))
+    db withSession (implicit session => {
+      val catsListResolver = (groupId: Long) => TableQuery[Cats].filter(_.groupId === groupId).run
+      result map (catGroupFactory.createForm(_, catsListResolver))
+    })
   }
 
   override def groupsCount = {
