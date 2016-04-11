@@ -31,7 +31,7 @@ class CatGroupFactoryTest extends FlatSpec with Matchers with MockFactory {
     val entity = new CatGroup(id, name)
     val catsInGroup: List[Cat] = mockCatsFactory
 
-    val form = catGroupFactory.createForm(entity, (id: Long) => catsInGroup)
+    val form = catGroupFactory.createForm(entity)((id: Long) => catsInGroup)
 
     form.name should be (name)
     form.cats(0).name should be (catsInGroup(0).name)
