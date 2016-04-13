@@ -1,9 +1,8 @@
 #!/usr/bin/python
 
-import urllib2
+from testapi import api
 
 
 def run(test_parameters):
-    resp = urllib2.urlopen('http://' + test_parameters['appserver_address'] + '/spray-test/cats/all')
+    return api.isAvailable(test_parameters)
 
-    return resp.getcode() == 200
