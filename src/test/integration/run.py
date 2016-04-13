@@ -8,7 +8,8 @@ import persistence.persistence
 # Executed by TravisCI after each push
 
 TEST_PARAMETERS = {
-    'appserver_address': 'localhost:8080'
+    'appserver_address': 'localhost:8080',
+    'context': 'spray-test'
 }
 
 TESTS = {
