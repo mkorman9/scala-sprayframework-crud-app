@@ -2,6 +2,10 @@ package com.example.model
 
 import slick.driver.MySQLDriver.simple._
 
+/*
+  Sample enum value representing sex of a single cat
+*/
+
 object Sex extends Enumeration {
   type Sex = Value
   val Male = Value("MALE")
