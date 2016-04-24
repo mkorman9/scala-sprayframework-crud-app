@@ -1,5 +1,6 @@
 package com.example.web.form
 
+import com.example.model.Sex.Sex
 import org.joda.time.DateTime
 
 /*
@@ -8,9 +9,11 @@ import org.joda.time.DateTime
 */
 
 case class CatInputForm(name: String,
+                        sex: Sex,
                         groupId: Long,
                         birthDate: DateTime)
 
 case class CatOutputForm(name: String,
+                         sex: Sex,
                          birthDate: DateTime)
 

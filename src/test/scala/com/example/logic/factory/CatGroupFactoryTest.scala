@@ -2,7 +2,7 @@ package com.example.logic.factory
 
 import java.sql.Timestamp
 
-import com.example.model.{Cat, CatGroup}
+import com.example.model.{Sex, Cat, CatGroup}
 import com.example.web.form.{CatGroupInputForm, CatOutputForm}
 import org.joda.time.DateTime
 import org.scalamock.scalatest.MockFactory
@@ -28,11 +28,11 @@ class CatGroupFactoryTest extends FlatSpec with Matchers with MockFactory {
   "Entity" should "be converted to form" in {
     def mockCatsFactory: List[Cat] = {
       val catsInGroup = List(
-        new Cat(Some(1L), "Jack", 1L, new Timestamp(1)),
-        new Cat(Some(2L), "Daniels", 1L, new Timestamp(1)))
+        new Cat(Some(1L), "Jack", Sex.Male, 1L, new Timestamp(1)),
+        new Cat(Some(2L), "Daniels", Sex.Male, 1L, new Timestamp(1)))
       val catsInGroupForms = List(
-        new CatOutputForm("Jack", new DateTime(1)),
-        new CatOutputForm("Daniels", new DateTime(1)))
+        new CatOutputForm("Jack", Sex.Male, new DateTime(1)),
+        new CatOutputForm("Daniels", Sex.Male, new DateTime(1)))
 
       (catFactory.createForm _).when(catsInGroup(0)).returns(catsInGroupForms(0))
       (catFactory.createForm _).when(catsInGroup(1)).returns(catsInGroupForms(1))
