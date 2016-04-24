@@ -19,13 +19,13 @@ before_script:
   - curl -o tomcat.tar.gz -L http://ftp.ps.pl/pub/apache/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
   - curl -o mysql-connector-java-5.1.38.jar -L http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar
   - tar -zxf tomcat.tar.gz
-  - cp ./mysql-connector-java-5.1.38.jar ./apache-tomcat-7.0.68/lib
+  - cp ./mysql-connector-java-5.1.38.jar ./apache-tomcat-7.0.69/lib
   - cp ./.travis/context.xml ./apache-tomcat-7.0.68/conf
-  - bash ./apache-tomcat-7.0.68/bin/startup.sh
+  - bash ./apache-tomcat-7.0.69/bin/startup.sh
   - mysql -e 'create database test;'
   - mysql test < './.travis/schema.sql'
 
 script:
-  - cp ./target/spray-test.war ./apache-tomcat-7.0.68/webapps
+  - cp ./target/spray-test.war ./apache-tomcat-7.0.69/webapps
   - sleep 45
   - python ./src/test/integration/run.py || exit 1
