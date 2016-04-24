@@ -16,7 +16,7 @@ before_install:
 install: "mvn package -Dmaven.javadoc.skip=true -B -V"
 
 before_script:
-  - curl -o tomcat.tar.gz -L http://ftp.piotrkosoft.net/pub/mirrors/ftp.apache.org/tomcat/tomcat-7/v7.0.68/bin/apache-tomcat-7.0.68.tar.gz
+  - curl -o tomcat.tar.gz -L http://ftp.ps.pl/pub/apache/tomcat/tomcat-7/v7.0.69/bin/apache-tomcat-7.0.69.tar.gz
   - curl -o mysql-connector-java-5.1.38.jar -L http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar
   - tar -zxf tomcat.tar.gz
   - cp ./mysql-connector-java-5.1.38.jar ./apache-tomcat-7.0.68/lib
