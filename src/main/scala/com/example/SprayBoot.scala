@@ -1,6 +1,7 @@
 package com.example
 
 import akka.actor.{ActorSystem, Props}
+import com.example.logic.CronLogic
 import com.example.module.MainModule
 import com.example.web.service.WebService
 import com.google.inject.Guice
@@ -15,4 +16,9 @@ class SprayBoot extends WebBoot {
 
   override val system = injector.getInstance(classOf[ActorSystem])
   override val serviceActor = system.actorOf(Props(injector.getInstance(classOf[WebService])))
+  initializeCrons
+
+  def initializeCrons = {
+    injector.getInstance(classOf[CronLogic]).init
+  }
 }
