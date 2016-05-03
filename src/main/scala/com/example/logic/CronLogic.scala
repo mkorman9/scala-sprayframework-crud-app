@@ -7,6 +7,10 @@ import com.google.inject.ImplementedBy
 import org.joda.time.DateTime
 import scala.concurrent.duration._
 
+/*
+  Example of scheduled job. May be usable in enterprise app
+*/
+
 @ImplementedBy(classOf[CronLogicImpl])
 trait CronLogic {
   def init
