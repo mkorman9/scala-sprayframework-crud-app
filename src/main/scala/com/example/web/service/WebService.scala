@@ -6,8 +6,9 @@ import akka.actor.Actor
 import com.example.logic.{CatGroupLogic, CatLogic}
 import com.example.web.form.{SetGroupForm, StatusForm, CatGroupInputForm, CatInputForm}
 import com.google.inject.ImplementedBy
+import spray.httpx.SprayJsonSupport
+import spray.json.DefaultJsonProtocol
 import spray.routing._
-import com.example.web.form.JsonSupport._
 
 /*
   Definition of webservice routes
@@ -19,7 +20,7 @@ trait WebService extends Actor with HttpService {
 }
 
 @Singleton
-class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic) extends WebService {
+class WebServiceImpl @Inject()(catLogic: CatLogic, catGroupLogic: CatGroupLogic) extends WebService with DefaultJsonProtocol with SprayJsonSupport  {
   def actorRefFactory = context
 
   def receive = runRoute(

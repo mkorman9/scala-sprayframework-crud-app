@@ -1,5 +1,7 @@
 package com.example.model
 
+import spray.json.{DeserializationException, JsValue, JsString, RootJsonFormat}
+
 import slick.driver.MySQLDriver.simple._
 
 /*
@@ -12,4 +14,11 @@ object Sex extends Enumeration {
   val Female = Value("FEMALE")
 
   implicit val Mapper = MappedColumnType.base[Value, String](_.toString, Sex.withName)
+  implicit val Protocol = new RootJsonFormat[Sex.Sex] {
+    def write(obj: Sex.Sex) = JsString(obj.toString)
+    def read(json: JsValue) = json match {
+      case JsString(s) => Sex.withName(s)
+      case _ => throw new DeserializationException("Not a valid sex value")
+    }
+  }
 }
